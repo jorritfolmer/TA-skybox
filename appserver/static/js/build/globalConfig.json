@@ -1,0 +1,274 @@
+{
+    "meta": {
+        "restRoot": "TA_skybox", 
+        "displayName": "Technical add-on for Skybox Security", 
+        "apiVersion": "3.0.0", 
+        "version": "1.0.0", 
+        "name": "TA-skybox"
+    }, 
+    "pages": {
+        "inputs": {
+            "title": "Inputs", 
+            "services": [
+                {
+                    "title": "Skybox assets", 
+                    "entity": [
+                        {
+                            "required": true, 
+                            "type": "text", 
+                            "help": "Enter a unique name for the data input", 
+                            "validators": [
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores.", 
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                }, 
+                                {
+                                    "maxLength": 100, 
+                                    "type": "string", 
+                                    "errorMsg": "Length of input name should be between 1 and 100", 
+                                    "minLength": 1
+                                }
+                            ], 
+                            "field": "name", 
+                            "label": "Name"
+                        }, 
+                        {
+                            "required": true, 
+                            "type": "text", 
+                            "help": "Time interval of input in seconds.", 
+                            "validators": [
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Interval must be an integer.", 
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$"
+                                }
+                            ], 
+                            "field": "interval", 
+                            "label": "Interval"
+                        }, 
+                        {
+                            "defaultValue": "default", 
+                            "required": true, 
+                            "type": "singleSelect", 
+                            "options": {
+                                "blackList": "^_.*$", 
+                                "endpointUrl": "data/indexes", 
+                                "createSearchChoice": true
+                            }, 
+                            "field": "index", 
+                            "validators": [
+                                {
+                                    "maxLength": 80, 
+                                    "type": "string", 
+                                    "errorMsg": "Length of index name should be between 1 and 80.", 
+                                    "minLength": 1
+                                }
+                            ], 
+                            "label": "Index"
+                        }, 
+                        {
+                            "required": true, 
+                            "type": "text", 
+                            "help": "E.g. https://myskyboxserver.corp.example:8443", 
+                            "validators": [
+                                {
+                                    "maxLength": 8192, 
+                                    "type": "string", 
+                                    "errorMsg": "Max length of text input is 8192", 
+                                    "minLength": 0
+                                }
+                            ], 
+                            "field": "skybox_uri", 
+                            "label": "Skybox URI"
+                        }, 
+                        {
+                            "required": true, 
+                            "type": "singleSelect", 
+                            "options": {
+                                "referenceName": "account"
+                            }, 
+                            "field": "global_account", 
+                            "label": "Global Account", 
+                            "help": ""
+                        }
+                    ], 
+                    "name": "skybox_assets"
+                }
+            ], 
+            "table": {
+                "actions": [
+                    "edit", 
+                    "enable", 
+                    "delete", 
+                    "clone"
+                ], 
+                "moreInfo": [
+                    {
+                        "label": "Name", 
+                        "field": "name"
+                    }, 
+                    {
+                        "label": "Interval", 
+                        "field": "interval"
+                    }, 
+                    {
+                        "label": "Index", 
+                        "field": "index"
+                    }, 
+                    {
+                        "label": "Status", 
+                        "field": "disabled"
+                    }, 
+                    {
+                        "label": "Skybox URI", 
+                        "field": "skybox_uri"
+                    }, 
+                    {
+                        "label": "Global Account", 
+                        "field": "global_account"
+                    }
+                ], 
+                "header": [
+                    {
+                        "label": "Name", 
+                        "field": "name"
+                    }, 
+                    {
+                        "label": "Interval", 
+                        "field": "interval"
+                    }, 
+                    {
+                        "label": "Index", 
+                        "field": "index"
+                    }, 
+                    {
+                        "label": "Status", 
+                        "field": "disabled"
+                    }
+                ]
+            }, 
+            "description": "Manage your data inputs"
+        }, 
+        "configuration": {
+            "title": "Configuration", 
+            "tabs": [
+                {
+                    "title": "Account", 
+                    "table": {
+                        "actions": [
+                            "edit", 
+                            "delete", 
+                            "clone"
+                        ], 
+                        "header": [
+                            {
+                                "label": "Account name", 
+                                "field": "name"
+                            }, 
+                            {
+                                "label": "Username", 
+                                "field": "username"
+                            }
+                        ]
+                    }, 
+                    "entity": [
+                        {
+                            "required": true, 
+                            "type": "text", 
+                            "help": "Enter a unique name for this account.", 
+                            "validators": [
+                                {
+                                    "maxLength": 50, 
+                                    "type": "string", 
+                                    "errorMsg": "Length of Account name should be between 1 and 50", 
+                                    "minLength": 1
+                                }, 
+                                {
+                                    "type": "regex", 
+                                    "errorMsg": "Account name must start with a letter and followed by alphabetic letters, digits or underscores.", 
+                                    "pattern": "^[a-zA-Z]\\w*$"
+                                }
+                            ], 
+                            "field": "name", 
+                            "label": "Account name"
+                        }, 
+                        {
+                            "required": true, 
+                            "type": "text", 
+                            "options": {
+                                "placeholder": "Enter the username here"
+                            }, 
+                            "field": "username", 
+                            "validators": [
+                                {
+                                    "maxLength": 200, 
+                                    "type": "string", 
+                                    "errorMsg": "Length of username should be between 1 and 200", 
+                                    "minLength": 1
+                                }
+                            ], 
+                            "label": "Username", 
+                            "help": "Enter the username for this account."
+                        }, 
+                        {
+                            "required": true, 
+                            "type": "text", 
+                            "help": "Enter the password for this account.", 
+                            "encrypted": true, 
+                            "validators": [
+                                {
+                                    "maxLength": 8192, 
+                                    "type": "string", 
+                                    "errorMsg": "Length of password should be between 1 and 8192", 
+                                    "minLength": 1
+                                }
+                            ], 
+                            "field": "password", 
+                            "label": "Password"
+                        }
+                    ], 
+                    "name": "account"
+                }, 
+                {
+                    "title": "Logging", 
+                    "entity": [
+                        {
+                            "defaultValue": "INFO", 
+                            "type": "singleSelect", 
+                            "options": {
+                                "disableSearch": true, 
+                                "autoCompleteFields": [
+                                    {
+                                        "value": "DEBUG", 
+                                        "label": "DEBUG"
+                                    }, 
+                                    {
+                                        "value": "INFO", 
+                                        "label": "INFO"
+                                    }, 
+                                    {
+                                        "value": "WARNING", 
+                                        "label": "WARNING"
+                                    }, 
+                                    {
+                                        "value": "ERROR", 
+                                        "label": "ERROR"
+                                    }, 
+                                    {
+                                        "value": "CRITICAL", 
+                                        "label": "CRITICAL"
+                                    }
+                                ]
+                            }, 
+                            "label": "Log level", 
+                            "field": "loglevel"
+                        }
+                    ], 
+                    "name": "logging"
+                }
+            ], 
+            "description": "Set up your add-on"
+        }
+    }
+}
