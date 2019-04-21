@@ -73,6 +73,7 @@ def collect_events(helper, ew):
             data = root.findall('.//return')
             tmp = yahoo.data(data[0])
             assetcount = tmp['return']
+            helper.log_debug("countAssetsByNames() returned assetcount %s" % assetcount)
         else:
             helper.log_error("FATAL ERROR calling countAssetsByNames() method, status_code %s" % response.status_code)
             exit(1)
@@ -83,6 +84,7 @@ def collect_events(helper, ew):
         subrange = subrange_type(start=0,size=assetcount)
         response = networkclient.service.findAssetsByNames('*', subrange)
         if response.status_code == 200:
+            helper.log_debug("findAssetsByNames() returned status_code %s" % response.status_code)
             root = ElementTree.fromstring(response.content)
             assets = root.findall('.//return/assets')
             for asset in assets:
